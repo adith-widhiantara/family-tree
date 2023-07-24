@@ -57,9 +57,11 @@ class FamilyController extends Controller
         if ($request->filled('tree')) {
             $parent = Family::query()
                 ->where('name', 'budi')
-                ->value('id');
+                ->first();
 
-            return FamilyResponse::json($text, $this->buildFamilyTree($parent));
+            $text = 'Family tree of ' . $parent->name . ' retrieved successfully.';
+
+            $families = $this->buildFamilyTree($parent->id);
         }
 
         return FamilyResponse::json($text, $families);
@@ -159,7 +161,6 @@ class FamilyController extends Controller
         }
 
         $tree = [
-            'id' => $person->id,
             'name' => $person->name,
             'gender' => $person->gender,
         ];
