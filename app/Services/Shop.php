@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use function gettype;
+
 class Shop
 {
     public array $books = [];
@@ -21,6 +23,10 @@ class Shop
      */
     public function bookGet($title): mixed
     {
+        if (gettype($title) == 'object') {
+            $title = $title->title;
+        }
+
         foreach ($this->books as $key => $book) {
             if ($book->getTitle() == $title) {
                 unset($this->books[$key]);

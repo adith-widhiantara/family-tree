@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Book;
 use App\Services\Shop;
+use App\Services\Book;
 use App\Services\Person;
-use function count;
 
 class BookstoreController extends Controller
 {
@@ -121,8 +120,7 @@ class BookstoreController extends Controller
         $books_theking = $shop->bookListByTitleContains('The King');
 
         if (count($books_theking) > 0) {
-            $book = $shop->bookGet($books_theking[0]->title);
-
+            $book = $shop->bookGet($books_theking[0]);
             $bayu->addToBag($book);
 
             echo "4: true";
